@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <span id="nameError" style="color:red;"></span><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <span id="emailError" style="color: red;"></span><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <span id="passwordError" style="color: red;"></span><br>
+        <button type="submit">Submit</button>
+    </form>
+<script>
+    let form = document.getElementById("myForm");
+    let nameInput = document.getElementById("name");
+    let emailInput = document.getElementById("email");
+    let passwordInput = document.getElementById("password");
+
+    form.addEventListener("submit", function(event){
+        let valid=true;
+
+        let name=nameInput.value.trim();
+        let nameError= document.getElementById("nameError");
+        if(name===""){
+            nameError.innerText= "Name is required";
+            valid=false;
+        }
+        else{
+            nameError.innerText="";
+        }
+
+        let email=emailInput.value.trim();
+        let emailError=document.getElementById("emailError");;
+        if(!/^\S+@\S+\.\S+$/.test(email)){
+            emailError.innerText="Invalid email address";
+            valid=false;
+        }
+        else{
+            emailError.innerText="";
+        }
+        let password = passwordInput.value.trim();
+        let passwordError= document.getElementById("passwordError");
+        if(password.length<8){
+            passwordError.innerText="Password must be at least 8 characters";
+            valid=false;
+        }
+        else{
+            passwordError.innerText="";
+        }
+        if(!valid){
+            event.preventDefault();
+        }
+    })
+</script>
+</body>
+</html>
